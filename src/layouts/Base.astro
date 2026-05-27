@@ -5,6 +5,39 @@ const {
   ogImage = "https://2dcat.com/og.jpg",
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
+
+const jsonLD = {
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "2DCAT",
+  "url": "https://2dcat.com",
+  "image": "https://2dcat.com/images/hero.jpg",
+  "description": "2DCAT is a dark synthpop duo from Washington, D.C. rooted in analog-driven synthpop, darkwave, coldwave, and minimal wave.",
+  "genre": ["Dark Synthpop", "Darkwave", "Coldwave", "Minimal Wave", "EBM", "Post-Punk", "Dark Electro", "Industrial", "Schwarze Szene"],
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Washington, D.C., USA"
+  },
+  "member": [
+    {
+      "@type": "Person",
+      "name": "HAEZL",
+      "roleName": "Vocals, Theremin, Lyrics"
+    },
+    {
+      "@type": "Person",
+      "name": "Johan Hauck",
+      "roleName": "Synthesizers, Drumkits, Arrangements"
+    }
+  ],
+  "sameAs": [
+    "https://open.spotify.com/artist/78CkUkpoNpLZbnIOv00M6Q",
+    "https://www.instagram.com/the2dcat/",
+    "https://www.facebook.com/the2dcat",
+    "https://www.youtube.com/@2dcat",
+    "https://2dcat.bandcamp.com/"
+  ]
+};
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -12,34 +45,30 @@ const {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
-  <meta name="keywords" content="2DCAT, dark synthpop, darkwave, coldwave, analog synthesizers, Washington DC, electronic music, HAEZL, Johan Hauck" />
-
+  <meta name="keywords" content="2DCAT, dark synthpop, darkwave, coldwave, minimal wave, EBM, post-punk, dark electro, industrial, Schwarze Szene, analog synthesizers, Washington DC, electronic music, HAEZL, Johan Hauck, Lebanon Hanover, Boy Harsher, Kite, NNHMN, Linea Aspera, Minuit Machine, Kontravoid, Zanias" />
   <link rel="canonical" href={canonicalURL} />
-
-  <!-- Open Graph -->
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={ogImage} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:site_name" content="2DCAT" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
   <meta name="twitter:url" content={canonicalURL} />
-
-  <!-- Verification (add values when ready) -->
   <!-- <meta name="google-site-verification" content="REPLACE_ME" /> -->
   <!-- <meta name="msvalidate.01" content="REPLACE_ME" /> -->
-
   <title>{title}</title>
-
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Trade+Gothic+Next+Condensed:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles/global.css" />
 </head>
 <body>
