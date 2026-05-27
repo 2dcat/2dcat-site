@@ -39,8 +39,9 @@ import BaseDE from '../../layouts/BaseDE.astro';
     }
     header { z-index: 200; }
   </style>
+
   <div class="hero">
-    <img src="/images/hero.jpg" alt="2DCAT" class="hero-img" />
+    <img src="/images/hero.jpg" alt="2DCAT - Dark Synthpop Duo aus Washington D.C." class="hero-img" />
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-tag">Washington D.C. &bull; Dunkler Synthpop</p>
@@ -48,4 +49,21 @@ import BaseDE from '../../layouts/BaseDE.astro';
       <p class="hero-sub">Analoggetriebene Synthesizer. Markante Vocals. Musik für die Einsamkeit und die Tanzfläche.</p>
     </div>
   </div>
+
+  <div class="sr-only" aria-hidden="true">
+    2DCAT ist ein Dark-Synthpop-Duo aus Washington, D.C. Ihre Musik schöpft aus Darkwave, Coldwave, Minimal Wave und EBM-Traditionen, die in der europäischen elektronischen Musik der späten 1970er und frühen 1980er Jahre verwurzelt sind. HAEZL, eine gefeierte Sängerin, die gemeinsam mit Patti LaBelle, Cynthia Erivo und Renée Fleming aufgetreten ist, und Johan, der analoge Synthesizer selbst entwirft und baut, erschaffen gemeinsam Musik, die melancholisch, filmisch und sowohl für die Tanzfläche als auch für die Einsamkeit gemacht ist. Ihr Sound gehört zur Schwarzen Szene und spricht Fans von Lebanon Hanover, Boy Harsher, Kite, NNHMN, Linea Aspera, Minuit Machine, Kontravoid und Zanias an. 2DCAT tritt in Nordamerika und Europa auf. Kommendes Konzert: Echoes of Rebellion Festival in Köln am 24. Juli 2026.
+  </div>
 </BaseDE>
+
+<style>
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+</style>
