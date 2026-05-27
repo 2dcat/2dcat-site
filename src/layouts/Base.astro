@@ -6,38 +6,68 @@ const {
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
 
-const jsonLD = {
-  "@context": "https://schema.org",
-  "@type": "MusicGroup",
-  "name": "2DCAT",
-  "url": "https://2dcat.com",
-  "image": "https://2dcat.com/images/hero.jpg",
-  "description": "2DCAT is a dark synthpop duo from Washington, D.C. rooted in analog-driven synthpop, darkwave, coldwave, and minimal wave.",
-  "genre": ["Dark Synthpop", "Darkwave", "Coldwave", "Minimal Wave", "EBM", "Post-Punk", "Dark Electro", "Industrial", "Schwarze Szene"],
-  "foundingLocation": {
-    "@type": "Place",
-    "name": "Washington, D.C., USA"
-  },
-  "member": [
-    {
-      "@type": "Person",
-      "name": "HAEZL",
-      "roleName": "Vocals, Theremin, Lyrics"
+const jsonLD = [
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "2DCAT",
+    "url": "https://2dcat.com",
+    "image": "https://2dcat.com/images/hero.jpg",
+    "description": "2DCAT is a dark synthpop duo from Washington, D.C. rooted in analog-driven synthpop, darkwave, coldwave, and minimal wave.",
+    "genre": ["Dark Synthpop", "Darkwave", "Coldwave", "Minimal Wave", "EBM", "Post-Punk", "Dark Electro", "Industrial", "Schwarze Szene"],
+    "foundingLocation": {
+      "@type": "Place",
+      "name": "Washington, D.C., USA"
     },
-    {
-      "@type": "Person",
-      "name": "Johan Hauck",
-      "roleName": "Synthesizers, Drumkits, Arrangements"
+    "member": [
+      {
+        "@type": "Person",
+        "name": "HAEZL",
+        "roleName": "Vocals, Theremin, Lyrics"
+      },
+      {
+        "@type": "Person",
+        "name": "Johan Hauck",
+        "roleName": "Synthesizers, Drumkits, Arrangements"
+      }
+    ],
+    "sameAs": [
+      "https://open.spotify.com/artist/78CkUkpoNpLZbnIOv00M6Q",
+      "https://www.instagram.com/the2dcat/",
+      "https://www.facebook.com/the2dcat",
+      "https://www.youtube.com/@2dcat",
+      "https://2dcat.bandcamp.com/"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "MusicGroup",
+      "name": "2DCAT"
+    },
+    "reviewBody": "A vocal caliber dark synthpop rarely gets: lungs, teeth, diction, and gravitas.",
+    "author": {
+      "@type": "Organization",
+      "name": "Post-Punk.com",
+      "url": "https://post-punk.com"
     }
-  ],
-  "sameAs": [
-    "https://open.spotify.com/artist/78CkUkpoNpLZbnIOv00M6Q",
-    "https://www.instagram.com/the2dcat/",
-    "https://www.facebook.com/the2dcat",
-    "https://www.youtube.com/@2dcat",
-    "https://2dcat.bandcamp.com/"
-  ]
-};
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "MusicGroup",
+      "name": "2DCAT"
+    },
+    "reviewBody": "A homemade electrical animal with wires for veins and bad intentions in its little metal heart.",
+    "author": {
+      "@type": "Organization",
+      "name": "Post-Punk.com",
+      "url": "https://post-punk.com"
+    }
+  }
+];
 ---
 <!DOCTYPE html>
 <html lang="en">
