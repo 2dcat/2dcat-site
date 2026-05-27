@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="2DCAT | Dark Synthpop from Washington DC"
+  description="2DCAT is a dark synthpop duo from Washington, D.C. Analog synthesizers, commanding vocals, and machine-driven rhythms rooted in darkwave, coldwave, and dark synthpop."
+>
+  <style>
+    footer { display: none; }
+    main { padding-top: 0; }
+    .hero {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: absolute;
+      bottom: 4rem;
+      left: 2rem;
+      z-index: 2;
+    }
+    header { z-index: 200; }
+  </style>
+  <div class="hero">
+    <img src="/images/hero.jpg" alt="2DCAT" class="hero-img" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-tag">Washington D.C. &bull; Dark Synthpop</p>
+      <h1>2DCAT</h1>
+      <p class="hero-sub">Analog-driven synthesizers. Commanding vocals. Music built for solitude and the dancefloor.</p>
+    </div>
+  </div>
+</Base>

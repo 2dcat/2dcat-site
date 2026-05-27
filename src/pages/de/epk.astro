@@ -1,0 +1,261 @@
+---
+import BaseDE from '../../layouts/BaseDE.astro';
+
+const galleryImages = [
+  "86ef3212.jpg",
+  "62942adc.jpg",
+  "6ffe881a.jpg",
+  "74e920ec.jpg",
+  "7682640a.jpg",
+  "6589f4b0.jpg",
+  "94aee7bd.jpg",
+  "1f6b285e.jpg",
+  "b71b89c5.jpg",
+  "d1b64a0f.jpg",
+];
+
+const videosLeft = [
+  "https://www.youtube.com/embed/uMQNizvE31M",
+  "https://www.youtube.com/embed/-8wlpD8m2-8",
+  "https://www.youtube.com/embed/y-BINpWprKI",
+];
+
+const videosRight = [
+  "https://www.youtube.com/embed/qJmwQ2Ur1q8",
+  "https://www.youtube.com/embed/AP0z_1VNPyw",
+  "https://www.youtube.com/embed/OahPbFGc79U",
+];
+---
+<BaseDE
+  title="EPK | 2DCAT"
+  description="2DCAT Electronic Press Kit. Dark Synthpop aus Washington D.C."
+>
+  <section class="section" style="padding-top:7rem">
+    <p class="section-label">Electronic Press Kit</p>
+    <div class="epk-hero">
+      <img src="/images/image09.jpg" alt="2DCAT" class="epk-hero-img" />
+    </div>
+
+    <div class="stats-row" style="margin-top:0">
+      <div class="stat"><span class="stat-number">2.8M</span><span class="stat-label">Spotify-Hörer</span></div>
+      <div class="stat"><span class="stat-number">7.2M</span><span class="stat-label">Spotify-Wiedergaben</span></div>
+      <div class="stat"><span class="stat-number">28.1K</span><span class="stat-label">Spotify-Follower</span></div>
+      <div class="stat"><span class="stat-number">8.2K</span><span class="stat-label">Instagram-Follower</span></div>
+      <div class="stat"><span class="stat-number">6.2K</span><span class="stat-label">Facebook-Follower</span></div>
+      <div class="stat"><span class="stat-number">4.4K</span><span class="stat-label">YouTube-Follower</span></div>
+    </div>
+
+    <img src="/images/image01.jpg" alt="Spotify Publikumsdaten" class="epk-audience" />
+
+    <div class="epk-bio">
+      <p>2DCAT ist ein Dark-Synthpop-Duo, das seinesgleichen sucht: HAEZL, eine gefeierte Opernsängerin, die gemeinsam mit Patti LaBelle, Cynthia Erivo und Renée Fleming auf der Bühne stand, und Johan, der einen Großteil der von ihnen verwendeten Synthesizer selbst entwirft und fertigt.</p>
+      <blockquote>
+        A vocal caliber dark synthpop rarely gets: lungs, teeth, diction, and gravitas.
+        <cite>Post-Punk.com</cite>
+      </blockquote>
+      <p>In Washington, D.C. beheimatet, schöpft 2DCAT aus den Darkwave- und Coldwave-Stilen der elektronisch geprägten Musik Europas der späten 70er und frühen 80er Jahre. Ihre energiegeladenen Live-Sets haben ausverkaufte Club-Nächte und Festivalbühnen in den USA und Europa zum Leuchten gebracht.</p>
+      <blockquote>
+        A homemade electrical animal with wires for veins and bad intentions in its little metal heart.
+        <cite>Post-Punk.com</cite>
+      </blockquote>
+      <p class="epk-fans">Für Fans von Lebanon Hanover, Boy Harsher und Kite.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <p class="section-label">Fotos</p>
+    <div class="epk-gallery">
+      {galleryImages.map((img) => (
+        <div class="epk-gallery-item">
+          <img src={`/images/${img}`} alt="2DCAT" />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <p class="section-label">Video</p>
+    <div class="epk-videos">
+      <div class="epk-video-col">
+        {videosLeft.map((url) => (
+          <div class="epk-video">
+            <iframe src={url} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        ))}
+      </div>
+      <div class="epk-video-col">
+        {videosRight.map((url) => (
+          <div class="epk-video">
+            <iframe src={url} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <p class="section-label" style="text-align:center">Live</p>
+    <p class="shows-title">Aktuelle & Ausgewählte 2DCAT Shows</p>
+    <table style="margin-top:2rem">
+      <thead>
+        <tr>
+          <th>Veranstaltungsort</th>
+          <th>Stadt</th>
+          <th>Datum</th>
+          <th>Kap.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="https://www.facebook.com/events/1453404649333562" target="_blank" rel="noopener">Echoes of Rebellion Festival</a></td><td>Köln, DE</td><td>24. Jul. 2026</td><td>450</td></tr>
+        <tr><td><a href="https://www.songkick.com/concerts/42775007-2dcat-at-oshaughnessys-pub" target="_blank" rel="noopener">O'Shaughnessy's</a></td><td>Alexandria, VA</td><td>18. Okt. 2025</td><td>150</td></tr>
+        <tr><td><a href="https://www.setlist.fm/setlist/2dcat/2025/cult-classic-brewing-company-stevensville-md-1b420d58.html" target="_blank" rel="noopener">Cult Classic Brewing</a></td><td>Kent Island, MD</td><td>24. Jul. 2025</td><td>185</td></tr>
+        <tr><td><a href="https://www.washingtonpost.com/dc-md-va/2025/07/17/best-things-to-do-dc-events/" target="_blank" rel="noopener">Penn Social</a></td><td>Washington, DC</td><td>19. Jul. 2025</td><td>500</td></tr>
+        <tr><td><a href="https://www.facebook.com/events/775637498119943/" target="_blank" rel="noopener">The Renegade</a></td><td>Arlington, VA</td><td>17. Jul. 2025</td><td>300</td></tr>
+        <tr><td><a href="https://www.facebook.com/events/1234022641450508" target="_blank" rel="noopener">QXT's</a></td><td>Newark, NJ</td><td>21. Jun. 2025</td><td>300</td></tr>
+        <tr><td><a href="https://www.facebook.com/events/1406388667167798" target="_blank" rel="noopener">Remedy</a></td><td>Pittsburgh, PA</td><td>19. Jun. 2025</td><td>80</td></tr>
+        <tr><td><a href="https://www.facebook.com/events/1033350351691339" target="_blank" rel="noopener">Metro Baltimore</a></td><td>Baltimore, MD</td><td>21. Sep. 2024</td><td>250</td></tr>
+        <tr><td><a href="https://www.facebook.com/events/2519398508254113" target="_blank" rel="noopener">The Passenger</a></td><td>Washington, DC</td><td>2. Aug. 2024</td><td>100</td></tr>
+        <tr><td><a href="https://www.facebook.com/events/369905078784668" target="_blank" rel="noopener">Pie Shop</a></td><td>Washington, DC</td><td>23. Apr. 2024</td><td>150</td></tr>
+        <tr><td><a href="https://www.facebook.com/events/1062512198140670/" target="_blank" rel="noopener">The Crack Fox</a></td><td>St. Louis, MO</td><td>18. Apr. 2024</td><td>200</td></tr>
+        <tr><td><a href="https://www.facebook.com/events/1508399573035411" target="_blank" rel="noopener">The Runaway</a></td><td>Washington, DC</td><td>13. Jan. 2024</td><td>150</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <p class="section-label">Presse & Features</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Publikation</th>
+          <th>Art</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="https://post-punk.com/keep-us-blinded-and-starving-dc-dark-synthpop-duo-2dcat-take-class-rage-to-the-factory-floor-in-video-for-eat-the-rich/" target="_blank" rel="noopener">Post-Punk.com</a></td><td>Feature</td></tr>
+        <tr><td><a href="https://schwarz-ontour.de/interview-2dcat/" target="_blank" rel="noopener">Schwarz on Tour</a></td><td>Interview</td></tr>
+        <tr><td><a href="https://regenmag.com/news/news-2dcat-champions-strength-and-dignity-against-idolatry-and-prayer-with-latest-single-hinting-at-upcoming-full-length-album/" target="_blank" rel="noopener">Regen Magazine</a></td><td>Feature</td></tr>
+        <tr><td><a href="https://thestateofsynth.com/podcast/s9e12-sad-cats-and-sting-in-a-codpiece/" target="_blank" rel="noopener">The State of Synth</a></td><td>Podcast-Interview</td></tr>
+        <tr><td><a href="https://www.youtube.com/live/obGJHGBKoaQ?si=JcFJlzJhruLzHkM0" target="_blank" rel="noopener">Eclectic Arts Media</a></td><td>Video-Interview</td></tr>
+        <tr><td><a href="https://www.imdb.com/title/tt26702944/" target="_blank" rel="noopener">Beyond Synth</a></td><td>Podcast-Interview</td></tr>
+        <tr><td><a href="https://parklifedc.com/2025/04/28/a-conversation-about-nick-cave-and-the-bad-seeds-with-2dcats-johan-hauck-live-the-anthem-4-21-25/" target="_blank" rel="noopener">Parklife DC</a></td><td>Feature</td></tr>
+        <tr><td><a href="https://dreadmusicreview.com/2024/10/16/2dcat-addresses-societal-pressures-for-women-with-their-haunting-allie-x-cover/" target="_blank" rel="noopener">Dread Music Review</a></td><td>Feature</td></tr>
+        <tr><td><a href="https://www.youtube.com/watch?v=jgQ_tWS0ExI" target="_blank" rel="noopener">Communion After Dark</a></td><td>Podcast-Feature</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <p class="section-label">Sync & Lizenzplatzierungen</p>
+    <table>
+      <thead>
+        <tr><th>Titel</th><th>Art</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="https://store.steampowered.com/app/1669670/SEQUENCE_STORM__Olokun_Dive_Expansion_Pack/" target="_blank" rel="noopener">Sequence Storm</a></td><td>Videospiel</td></tr>
+        <tr><td><a href="https://www.imdb.com/title/tt7134690/" target="_blank" rel="noopener">I Like Me</a></td><td>Spielfilm</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <p class="section-label">Pressematerial & Booking</p>
+    <p style="margin-bottom:2rem">Verfügbar für Nordamerika und Europa.</p>
+    <div class="epk-actions">
+      <a href="https://drive.google.com/drive/u/1/folders/1oLPjSo92WIupT8DdGqErdnZNEKIVR7O9" target="_blank" rel="noopener" class="epk-btn">Pressematerial & Techrider</a>
+      <button onclick="window.print()" class="epk-btn epk-btn-print">EPK als PDF herunterladen</button>
+    </div>
+    <p style="margin-top:2rem;color:var(--text-muted)">Booking: <a href="mailto:booking@2dcat.net">booking@2dcat.net</a></p>
+    <p style="margin-top:0.5rem;color:var(--text-muted);font-size:0.85rem">E-Mail-Korrespondenz gerne auf Deutsch oder Englisch.</p>
+  </section>
+</BaseDE>
+
+<style>
+.epk-hero-img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.epk-audience {
+  width: 100%;
+  max-width: 700px;
+  display: block;
+  margin: 2rem auto;
+}
+.epk-bio {
+  max-width: 800px;
+  margin: 2rem auto 0;
+  text-align: center;
+}
+.epk-bio blockquote { text-align: left; }
+.epk-bio p { margin-bottom: 1.5rem; }
+.epk-fans { color: var(--text-muted); }
+.epk-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.epk-gallery-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+.epk-videos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.epk-video-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.epk-video iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: block;
+}
+.shows-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--text);
+  margin-top: 0.5rem;
+}
+.epk-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.epk-btn {
+  border: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  display: inline-block;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-family: var(--font-display);
+  transition: border-color 0.2s, color 0.2s;
+  color: var(--text);
+}
+.epk-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.epk-btn-print {
+  background: none;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .epk-videos { grid-template-columns: 1fr; }
+  .epk-gallery { grid-template-columns: repeat(2, 1fr); }
+}
+</style>

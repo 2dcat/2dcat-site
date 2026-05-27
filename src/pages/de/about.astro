@@ -1,0 +1,157 @@
+---
+import BaseDE from '../../layouts/BaseDE.astro';
+
+const photos = [
+  "slideshow03-223ed180.jpg",
+  "slideshow03-c4b905bf.jpg",
+  "slideshow03-ef8fce40.jpg",
+  "slideshow03-c7ae04e9.jpg",
+  "slideshow03-aabc0437.jpg",
+  "slideshow03-740da52a.jpg",
+  "slideshow03-b4f5b031.jpg",
+  "slideshow03-6100ff93.jpg",
+  "slideshow03-f0e8aee5.jpg",
+  "slideshow03-e0ec7282.jpg",
+  "slideshow03-ef353179.jpg",
+  "slideshow03-4e464c64.jpg",
+  "slideshow03-7488bff6.jpg",
+  "slideshow03-beed5c04.jpg",
+];
+---
+<BaseDE
+  title="Über 2DCAT"
+  description="2DCAT ist ein Dark-Synthpop-Duo aus Washington, D.C. HAEZL am Gesang, Johan an analogen Synthesizern."
+>
+  <section class="section">
+    <p class="section-label">Über uns</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h1>2DCAT</h1>
+        <p>2DCAT ist ein Dark-Synthpop-Duo aus Washington, D.C., verwurzelt in analoggetriebenem Synthpop sowie modernem Darkwave und Coldwave. Ihre Musik ist melancholisch, magnetisch und filmisch und erschafft emotional aufgeladene Songs, die allein genauso gut funktionieren wie auf der Tanzfläche.</p>
+        <p>Ihr Sound basiert auf analoger Schaltungstechnik, markanten Vocals und maschinengetriebenen Rhythmen. 2DCAT erschafft Songs, die Präzision und Verletzlichkeit in Balance halten, getragen von Melodie und Wiederholung. Das Ergebnis ist Musik, die sich zugleich mechanisch und menschlich anfühlt: intim, düster und fesselnd.</p>
+      </div>
+      <div class="carousel">
+        <div class="carousel-track" id="carouselTrack">
+          {photos.map((photo) => (
+            <div class="carousel-slide">
+              <img src={`/images/${photo}`} alt="2DCAT" />
+            </div>
+          ))}
+        </div>
+        <div class="carousel-controls">
+          <button id="prevBtn" aria-label="Zurück">&#9679;</button>
+          <button id="nextBtn" aria-label="Weiter">&#9679;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <p class="section-label">Mitglieder</p>
+    <div class="members-grid">
+      <div>
+        <h3>HAEZL</h3>
+        <p class="member-role">Gesang / Theremin / Texte</p>
+        <p>HAEZL arbeitete als Backgroundsängerin bei Videos und Live-Auftritten für The Beach Boys, Patti LaBelle, Cynthia Erivo, Renée Fleming und The Filharmonic. Sie war in zahlreichen Fernsehproduktionen zu sehen, darunter VH1, TLC und die Today Show.</p>
+      </div>
+      <div>
+        <h3>Johan</h3>
+        <p class="member-role">Synthesizer / Drumkits / Arrangements</p>
+        <p>Johan ist seit über 20 Jahren in der Electro-Industrial-Szene aktiv und hat mit zahlreichen Bands gespielt, unter anderem auf Bühnen in Asien und Europa. Er entwirft und fertigt den Großteil der von 2DCAT verwendeten Synthesizer selbst.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <p class="section-label">Instrumente</p>
+    <h2>Synthesizer & Drumkits</h2>
+    <p class="gear-list">Chroma Polaris, Octave-Plateau Voyetra Eight, Oberheim OB-8, Roland Juno-106, Korg MiniKorg-700, Roland SH-2, Korg Polysix, LinnDrum Linn 9000, SCI DrumTraks, Yamaha RX5, Vermona MARS, SCI Pro-One, Roland JP-8080, Roland Alpha Juno 1 mit Retroaktiv MPG-50, Roland MKS-70 mit Retroaktiv MPG-70, Sequential Prophet Rev2, Korg Micro-Preset M500, Access Virus TI, Yamaha AN1x, Nord Lead 2X, Waldorf Microwave II, Waldorf Micro-Q, Roland JV-1080, Yamaha DX200.</p>
+    <p class="gear-list">Selbstgebaute Instrumente: Litterbox 1.3, 2dPawlaris, Pawlivoks16, LynxDrum.</p>
+  </section>
+</BaseDE>
+
+<style>
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+.about-text h1 { margin-bottom: 1.5rem; }
+.about-text p { margin-bottom: 1.5rem; max-width: 500px; }
+.carousel { position: relative; overflow: hidden; }
+.carousel-track { display: grid; }
+.carousel-slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.carousel-slide.active { opacity: 1; }
+.carousel-slide img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.carousel-controls {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+.carousel-controls button {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.carousel-controls button:hover { border-color: var(--accent); color: var(--accent); }
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-top: 2rem;
+}
+.member-role {
+  color: var(--accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0.5rem 0 1rem;
+}
+.gear-list { margin-top: 1.5rem; color: var(--text-muted); max-width: 800px; }
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+  const slides = document.querySelectorAll('.carousel-slide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let current = 0;
+  const total = slides.length;
+
+  slides[current].classList.add('active');
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    current = (index + total) % total;
+    slides[current].classList.add('active');
+  }
+
+  function goToRandom() {
+    let pick;
+    do { pick = Math.floor(Math.random() * total); } while (pick === current);
+    goTo(pick);
+  }
+
+  prevBtn.addEventListener('click', () => goToRandom());
+  nextBtn.addEventListener('click', () => goToRandom());
+  setInterval(() => goToRandom(), 4000);
+</script>
