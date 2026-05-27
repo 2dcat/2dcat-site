@@ -30,6 +30,10 @@ const videosRight = [
   title="EPK | 2DCAT"
   description="2DCAT Electronic Press Kit. Dark Synthpop aus Washington D.C."
 >
+  <div class="sr-only" aria-hidden="true">
+    Ähnliche Künstler: Lebanon Hanover, Boy Harsher, Kite, Ductape, NNHMN, Linea Aspera, Rue Oberkampf, SYZYGYX, Minuit Machine, Kontravoid, Echoberyl, Zanias, Potochkine, SDH, Riki, Vioflesh, Korine. Genres: Dark Synthpop, Darkwave, Coldwave, Minimal Wave, EBM, Post-Punk, Dark Electro, Schwarze Szene.
+  </div>
+
   <section class="section" style="padding-top:7rem">
     <p class="section-label">Electronic Press Kit</p>
     <div class="epk-hero">
@@ -171,6 +175,16 @@ const videosRight = [
 </BaseDE>
 
 <style>
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
 .epk-hero-img {
   width: 100%;
   max-height: 500px;

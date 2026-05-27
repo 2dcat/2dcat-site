@@ -30,7 +30,11 @@ const videosRight = [
   title="EPK | 2DCAT"
   description="2DCAT electronic press kit. Dark synthpop from Washington D.C."
 >
-  <section class="section" style="padding-top:6rem">
+  <div class="sr-only" aria-hidden="true">
+    Similar artists: Lebanon Hanover, Boy Harsher, Kite, Ductape, NNHMN, Linea Aspera, Rue Oberkampf, SYZYGYX, Minuit Machine, Kontravoid, Echoberyl, Zanias, Potochkine, SDH, Riki, Vioflesh, Korine. Genres: dark synthpop, darkwave, coldwave, minimal wave, EBM, post-punk, dark electro, Schwarze Szene.
+  </div>
+
+  <section class="section" style="padding-top:7rem">
     <p class="section-label">Electronic Press Kit</p>
     <div class="epk-hero">
       <img src="/images/image09.jpg" alt="2DCAT" class="epk-hero-img" />
@@ -140,7 +144,7 @@ const videosRight = [
         <tr><td><a href="https://www.imdb.com/title/tt26702944/" target="_blank" rel="noopener">Beyond Synth</a></td><td>Podcast Interview</td></tr>
         <tr><td><a href="https://parklifedc.com/2025/04/28/a-conversation-about-nick-cave-and-the-bad-seeds-with-2dcats-johan-hauck-live-the-anthem-4-21-25/" target="_blank" rel="noopener">Parklife DC</a></td><td>Feature</td></tr>
         <tr><td><a href="https://dreadmusicreview.com/2024/10/16/2dcat-addresses-societal-pressures-for-women-with-their-haunting-allie-x-cover/" target="_blank" rel="noopener">Dread Music Review</a></td><td>Feature</td></tr>
-        <tr><td><a href="https://www.youtube.com/watch?v=jgQ_tWS0ExI" target="_blank" rel="noopener">Communion After Dark</a></td><td>Podcast Support</td></tr>
+        <tr><td><a href="https://www.youtube.com/watch?v=jgQ_tWS0ExI" target="_blank" rel="noopener">Communion After Dark</a></td><td>Podcast Feature</td></tr>
       </tbody>
     </table>
   </section>
@@ -170,6 +174,16 @@ const videosRight = [
 </Base>
 
 <style>
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
 .epk-hero-img {
   width: 100%;
   max-height: 500px;
@@ -188,15 +202,9 @@ const videosRight = [
   margin: 2rem auto 0;
   text-align: center;
 }
-.epk-bio blockquote {
-  text-align: left;
-}
-.epk-bio p {
-  margin-bottom: 1.5rem;
-}
-.epk-fans {
-  color: var(--text-muted);
-}
+.epk-bio blockquote { text-align: left; }
+.epk-bio p { margin-bottom: 1.5rem; }
+.epk-fans { color: var(--text-muted); }
 .epk-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -262,11 +270,5 @@ const videosRight = [
 @media (max-width: 768px) {
   .epk-videos { grid-template-columns: 1fr; }
   .epk-gallery { grid-template-columns: repeat(2, 1fr); }
-}
-main {
-  padding-top: 0 !important;
-}
-.section:first-child {
-  padding-top: 7rem !important;
 }
 </style>

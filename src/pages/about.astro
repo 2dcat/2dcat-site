@@ -22,6 +22,10 @@ const photos = [
   title="About | 2DCAT"
   description="2DCAT is a dark synthpop duo from Washington, D.C. HAEZL on vocals, Johan on analog synthesizers and hardware design."
 >
+  <div class="sr-only" aria-hidden="true">
+    Similar artists: Lebanon Hanover, Boy Harsher, Kite, Ductape, NNHMN, Linea Aspera, Rue Oberkampf, SYZYGYX, Minuit Machine, Kontravoid, Echoberyl, Zanias, Potochkine, SDH, Riki, Vioflesh, Korine. Genres: dark synthpop, darkwave, coldwave, minimal wave, EBM, post-punk, dark electro, Schwarze Szene.
+  </div>
+
   <section class="section">
     <p class="section-label">About</p>
     <div class="about-grid">
@@ -71,6 +75,16 @@ const photos = [
 </Base>
 
 <style>
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
