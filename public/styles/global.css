@@ -292,8 +292,6 @@ blockquote cite {
 }
 
 @media (max-width: 680px) {
-  nav ul { gap: 1rem; }
-  nav ul li:nth-child(n+5) { display: none; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .stat { border-bottom: 1px solid var(--border); }
 }
