@@ -316,6 +316,7 @@ blockquote cite {
   padding: 0.5rem;
   flex-direction: column;
   gap: 5px;
+  z-index: 200;
 }
 
 .nav-toggle span {
@@ -326,6 +327,19 @@ blockquote cite {
   transition: all 0.3s ease;
 }
 
+.nav-close {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: none;
+  z-index: 10000;
+}
+
 @media (max-width: 900px) {
   .nav-toggle {
     display: flex;
@@ -333,35 +347,38 @@ blockquote cite {
 
   nav ul {
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(10, 10, 10, 0.98);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    z-index: 150;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: #0a0a0a !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2rem !important;
+    z-index: 9999 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
   }
 
   nav ul.open {
-    display: flex;
+    display: flex !important;
+  }
+
+  nav ul li {
+    display: block !important;
+    width: auto !important;
   }
 
   nav ul a {
-    font-size: 1.2rem;
+    font-size: 1.4rem !important;
+    color: var(--text) !important;
+    letter-spacing: 0.15em !important;
   }
 
   .nav-close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    color: var(--text);
-    font-size: 1.5rem;
-    cursor: pointer;
+    display: block;
   }
 }
