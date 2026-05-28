@@ -104,11 +104,18 @@ const jsonLD = [
   <link href="https://fonts.googleapis.com/css2?family=Trade+Gothic+Next+Condensed:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles/global.css" />
 </head>
+
 <body>
   <header>
     <nav>
       <a href="/" class="site-logo">2DCAT</a>
-      <ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="navMenu">
+        <button class="nav-close" id="navClose" aria-label="Close menu">&times;</button>
         <li><a href="https://2dcat-music.myshopify.com/" target="_blank" rel="noopener">Merch</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/music">Music</a></li>
@@ -133,5 +140,13 @@ const jsonLD = [
       <a href="https://2dcat.bandcamp.com/" target="_blank" rel="noopener">Bandcamp</a>
     </div>
   </footer>
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('navMenu');
+    const close = document.getElementById('navClose');
+    toggle.addEventListener('click', () => menu.classList.add('open'));
+    close.addEventListener('click', () => menu.classList.remove('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  </script>
 </body>
 </html>
