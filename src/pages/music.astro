@@ -1,9 +1,142 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const musicSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicAlbum",
+    "name": "This is not for you.",
+    "url": "https://2dcat.bandcamp.com/album/this-is-not-for-you",
+    "image": "https://f4.bcbits.com/img/a2652299263_5.jpg",
+    "datePublished": "2025-07-11",
+    "numTracks": 12,
+    "genre": ["Dark Synthpop", "Darkwave", "Coldwave"],
+    "byArtist": {
+      "@type": "MusicGroup",
+      "@id": "https://2dcat.com/#band",
+      "name": "2DCAT"
+    },
+    "track": [
+      { "@type": "MusicRecording", "name": "Underground", "position": 1 },
+      { "@type": "MusicRecording", "name": "Rise As One", "position": 2 },
+      { "@type": "MusicRecording", "name": "The Darkest Hour", "position": 3 },
+      { "@type": "MusicRecording", "name": "Elegy", "position": 4 },
+      { "@type": "MusicRecording", "name": "Frames", "position": 5 },
+      { "@type": "MusicRecording", "name": "Falling Down", "position": 6 },
+      { "@type": "MusicRecording", "name": "Data Fusion", "position": 7 },
+      { "@type": "MusicRecording", "name": "Off With Her Tits", "position": 8 },
+      { "@type": "MusicRecording", "name": "Take My Hand", "position": 9 },
+      { "@type": "MusicRecording", "name": "The Last Refrain", "position": 10 }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicAlbum",
+    "name": "Covers",
+    "url": "https://2dcat.bandcamp.com/album/covers",
+    "image": "https://f4.bcbits.com/img/a0645441141_5.jpg",
+    "datePublished": "2024-08-09",
+    "numTracks": 3,
+    "genre": ["Dark Synthpop", "Darkwave", "Coldwave"],
+    "byArtist": {
+      "@type": "MusicGroup",
+      "@id": "https://2dcat.com/#band",
+      "name": "2DCAT"
+    },
+    "track": [
+      { "@type": "MusicRecording", "name": "Touch In The Night", "position": 1 },
+      { "@type": "MusicRecording", "name": "Always", "position": 2 },
+      { "@type": "MusicRecording", "name": "Off With Her Tits", "position": 3 }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicAlbum",
+    "name": "Fantastic Voyage",
+    "url": "https://2dcat.bandcamp.com/album/fantastic-voyage",
+    "image": "https://f4.bcbits.com/img/a2473173322_5.jpg",
+    "datePublished": "2022-12-02",
+    "numTracks": 12,
+    "genre": ["Dark Synthpop"],
+    "byArtist": {
+      "@type": "MusicGroup",
+      "@id": "https://2dcat.com/#band",
+      "name": "2DCAT"
+    },
+    "track": [
+      { "@type": "MusicRecording", "name": "Star 2000", "position": 1 },
+      { "@type": "MusicRecording", "name": "Come Back To Me", "position": 2 },
+      { "@type": "MusicRecording", "name": "Give Up", "position": 3 },
+      { "@type": "MusicRecording", "name": "Stay With Me", "position": 4 },
+      { "@type": "MusicRecording", "name": "Magic", "position": 5 },
+      { "@type": "MusicRecording", "name": "It's Hard", "position": 6 },
+      { "@type": "MusicRecording", "name": "The Music", "position": 7 },
+      { "@type": "MusicRecording", "name": "I'm On My Own", "position": 8 },
+      { "@type": "MusicRecording", "name": "Go Away", "position": 9 },
+      { "@type": "MusicRecording", "name": "Trying To Be", "position": 10 },
+      { "@type": "MusicRecording", "name": "The End Of The World", "position": 11 },
+      { "@type": "MusicRecording", "name": "Cosmic Gate", "position": 12 }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicAlbum",
+    "name": "Weeks Where Decades Happen",
+    "url": "https://2dcat.bandcamp.com/album/weeks-where-decades-happen",
+    "image": "https://f4.bcbits.com/img/a1815091774_5.jpg",
+    "datePublished": "2020-11-13",
+    "numTracks": 12,
+    "genre": ["Dark Synthpop"],
+    "byArtist": {
+      "@type": "MusicGroup",
+      "@id": "https://2dcat.com/#band",
+      "name": "2DCAT"
+    },
+    "track": [
+      { "@type": "MusicRecording", "name": "Storm Signals", "position": 1 },
+      { "@type": "MusicRecording", "name": "03:00 (UTC +3 Edit)", "position": 2 },
+      { "@type": "MusicRecording", "name": "Strange Love", "position": 3 },
+      { "@type": "MusicRecording", "name": "Sunset", "position": 4 },
+      { "@type": "MusicRecording", "name": "Believe (Orbus Edit)", "position": 5 },
+      { "@type": "MusicRecording", "name": "I Remember", "position": 6 },
+      { "@type": "MusicRecording", "name": "I Don't Want You Back", "position": 7 },
+      { "@type": "MusicRecording", "name": "One with You", "position": 8 },
+      { "@type": "MusicRecording", "name": "Remember Sailor! (Siren's Call Edit)", "position": 9 },
+      { "@type": "MusicRecording", "name": "Moths", "position": 10 },
+      { "@type": "MusicRecording", "name": "Attack and Dethrone God (Xenoblade Edit)", "position": 11 },
+      { "@type": "MusicRecording", "name": "Summer, 2020", "position": 12 }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "@id": "https://2dcat.com/music/#eor2026",
+    "name": "2DCAT at Echoes of Rebellion Festival",
+    "startDate": "2026-07-24",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "Echoes of Rebellion Festival",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cologne",
+        "addressCountry": "DE"
+      }
+    },
+    "performer": {
+      "@type": "MusicGroup",
+      "@id": "https://2dcat.com/#band",
+      "name": "2DCAT"
+    },
+    "url": "https://www.bandsintown.com/a/14389701-2dcat"
+  }
+];
 ---
 <Base
   title="Music & Shows | 2DCAT"
   description="Stream 2DCAT on Spotify, Apple Music, YouTube, and Bandcamp. Dark synthpop from Washington D.C. Live show dates and tickets."
+  pageSchema={musicSchema}
 >
   <section class="section" style="padding-top:7rem">
     <p class="section-label">Music</p>
@@ -71,7 +204,7 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <script>
-  const APP_ID = '352c0582b5eea3177112491a25b9f1fd'; // replace with your actual key
+  const APP_ID = '352c0582b5eea3177112491a25b9f1fd';
 
   async function loadShows() {
     const tbody = document.getElementById('shows-tbody');
@@ -96,7 +229,6 @@ import Base from '../layouts/Base.astro';
         const city = event.venue
           ? `${event.venue.city}${event.venue.country ? ', ' + event.venue.country : ''}`
           : '';
-        // Use first offer URL as ticket link, fallback to BIT event page
         const ticketUrl = event.offers?.[0]?.url ?? event.url ?? '#';
 
         return `<tr>

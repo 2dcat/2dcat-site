@@ -2,29 +2,29 @@
 import Base from '../layouts/Base.astro';
 
 const photos = [
-  "slideshow03-223ed180.jpg",
-  "slideshow03-c4b905bf.jpg",
-  "slideshow03-ef8fce40.jpg",
-  "slideshow03-c7ae04e9.jpg",
-  "slideshow03-aabc0437.jpg",
-  "slideshow03-740da52a.jpg",
-  "slideshow03-b4f5b031.jpg",
-  "slideshow03-6100ff93.jpg",
-  "slideshow03-f0e8aee5.jpg",
-  "slideshow03-e0ec7282.jpg",
-  "slideshow03-ef353179.jpg",
-  "slideshow03-4e464c64.jpg",
-  "slideshow03-7488bff6.jpg",
-  "slideshow03-beed5c04.jpg",
+  { file: "slideshow03-223ed180.jpg", alt: "2DCAT live performance" },
+  { file: "slideshow03-c4b905bf.jpg", alt: "HAEZL performing with 2DCAT" },
+  { file: "slideshow03-ef8fce40.jpg", alt: "Johan performing with 2DCAT" },
+  { file: "slideshow03-c7ae04e9.jpg", alt: "2DCAT on stage" },
+  { file: "slideshow03-aabc0437.jpg", alt: "2DCAT darkwave live set" },
+  { file: "slideshow03-740da52a.jpg", alt: "HAEZL and Johan of 2DCAT" },
+  { file: "slideshow03-b4f5b031.jpg", alt: "2DCAT performing live" },
+  { file: "slideshow03-6100ff93.jpg", alt: "2DCAT band photo" },
+  { file: "slideshow03-f0e8aee5.jpg", alt: "2DCAT press photo" },
+  { file: "slideshow03-e0ec7282.jpg", alt: "HAEZL vocals theremin 2DCAT" },
+  { file: "slideshow03-ef353179.jpg", alt: "Johan synthesizers 2DCAT" },
+  { file: "slideshow03-4e464c64.jpg", alt: "2DCAT live show" },
+  { file: "slideshow03-7488bff6.jpg", alt: "2DCAT performing darkwave" },
+  { file: "slideshow03-beed5c04.jpg", alt: "2DCAT Washington D.C." },
 ];
 ---
 <Base
-  title="About | 2DCAT"
-  description="2DCAT is a dark synthpop duo from Washington, D.C. HAEZL on vocals, Johan on analog synthesizers and hardware design."
+  title="About 2DCAT | Dark Synthpop Duo from Washington D.C."
+  description="2DCAT is a dark synthpop and darkwave duo from Washington, D.C. HAEZL on vocals and theremin, Johan on analog synthesizers and FPGA-based hardware instruments. Rooted in the Schwarze Szene."
 >
-  <div class="sr-only" aria-hidden="true">
+  <p class="crawl-only">
     Similar artists: Lebanon Hanover, Boy Harsher, Kite, Ductape, NNHMN, Linea Aspera, Rue Oberkampf, SYZYGYX, Minuit Machine, Kontravoid, Echoberyl, Zanias, Potochkine, SDH, Riki, Vioflesh, Korine. Genres: dark synthpop, darkwave, coldwave, minimal wave, EBM, post-punk, dark electro, Schwarze Szene.
-  </div>
+  </p>
 
   <section class="section">
     <p class="section-label">About</p>
@@ -38,7 +38,7 @@ const photos = [
         <div class="carousel-track" id="carouselTrack">
           {photos.map((photo) => (
             <div class="carousel-slide">
-              <img src={`/images/${photo}`} alt="2DCAT" />
+              <img src={`/images/${photo.file}`} alt={photo.alt} />
             </div>
           ))}
         </div>
@@ -61,7 +61,7 @@ const photos = [
       <div>
         <h3>Johan</h3>
         <p class="member-role">Synthesizers / Drumkits / Arrangements</p>
-        <p>Johan has been a part of numerous electro-industrial bands over the last 20 years and has played extensively across Asia and Europe. He designs and fabricates most of the synthesizers 2DCAT uses from scratch.</p>
+        <p>Johan has been a part of numerous electro-industrial bands over the last 20 years and has played extensively across Asia and Europe. He designs and fabricates most of the synthesizers 2DCAT uses from scratch, including FPGA-based instruments built for live performance.</p>
       </div>
     </div>
   </section>
@@ -75,7 +75,7 @@ const photos = [
 </Base>
 
 <style>
-.sr-only {
+.crawl-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -165,7 +165,7 @@ const photos = [
     goTo(pick);
   }
 
-  prevBtn.addEventListener('click', () => goToRandom());
-  nextBtn.addEventListener('click', () => goToRandom());
+  prevBtn?.addEventListener('click', () => goToRandom());
+  nextBtn?.addEventListener('click', () => goToRandom());
   setInterval(() => goToRandom(), 4000);
 </script>

@@ -14,6 +14,19 @@ const galleryImages = [
   "d1b64a0f.jpg",
 ];
 
+const galleryAlts = [
+  "2DCAT Live-Auftritt",
+  "HAEZL auf der Bühne mit 2DCAT",
+  "Johan auf der Bühne mit 2DCAT",
+  "2DCAT Live-Show",
+  "2DCAT Darkwave-Set",
+  "HAEZL und Johan von 2DCAT",
+  "2DCAT Konzertfoto",
+  "2DCAT Auftritt",
+  "2DCAT Bandfoto",
+  "2DCAT Pressefoto",
+];
+
 const videosLeft = [
   "https://www.youtube.com/embed/uMQNizvE31M",
   "https://www.youtube.com/embed/-8wlpD8m2-8",
@@ -25,19 +38,86 @@ const videosRight = [
   "https://www.youtube.com/embed/AP0z_1VNPyw",
   "https://www.youtube.com/embed/OahPbFGc79U",
 ];
+
+const epkSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Welches Genre spielt 2DCAT?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "2DCAT ist ein Dark-Synthpop- und Darkwave-Duo aus Washington, D.C. Ihr Sound schöpft aus Coldwave-, Minimal-Wave- und EBM-Traditionen der europäischen elektronischen Musik der späten 1970er und frühen 1980er Jahre. Sie gehören zur Schwarzen Szene."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wer sind die Mitglieder von 2DCAT?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "2DCAT besteht aus HAEZL (Gesang und Theremin) und Johan (Synthesizer und Drummaschinen). HAEZL ist eine ausgebildete Opernsängerin, die gemeinsam mit Patti LaBelle, Cynthia Erivo und Renée Fleming aufgetreten ist. Johan entwirft und baut die analogen Synthesizer und FPGA-basierten Instrumente für die Live-Auftritte selbst."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wo ist 2DCAT beheimatet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "2DCAT ist in Washington, D.C. ansässig und tritt in Nordamerika und Europa auf. Deutschland ist ihr zweitgrößter Markt, mit besonders starkem Publikum in Berlin, Frankfurt und Hamburg."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie kann man 2DCAT buchen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "2DCAT ist für Buchungen in Nordamerika und Europa verfügbar. Buchungsanfragen bitte an booking@2dcat.net. E-Mail-Korrespondenz gerne auf Deutsch oder Englisch. Pressematerial und Techrider sind auf Anfrage erhältlich."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie ist das Live-Setup von 2DCAT?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "2DCAT tritt live mit selbstgebauten analogen Synthesizern, FPGA-basierten Instrumenten und Hardware-Drummaschinen auf. HAEZL übernimmt Gesang und Theremin. Ihre Live-Sets haben Venues von 80 bis 500 Personen in den USA und Europa bespielt."
+        }
+      }
+    ]
+  }
+];
 ---
 <BaseDE
-  title="EPK | 2DCAT"
-  description="2DCAT Electronic Press Kit. Dark Synthpop aus Washington D.C."
+  title="EPK | 2DCAT — Dark Synthpop Pressemappe & Booking"
+  description="Electronic Press Kit von 2DCAT, Dark-Synthpop-Duo aus Washington D.C. Booking, Pressematerial, Show-Historie und Publikumsdaten. Verfügbar für Nordamerika und Europa."
+  pageSchema={epkSchema}
 >
-  <div class="sr-only" aria-hidden="true">
-    Ähnliche Künstler: Lebanon Hanover, Boy Harsher, Kite, Ductape, NNHMN, Linea Aspera, Rue Oberkampf, SYZYGYX, Minuit Machine, Kontravoid, Echoberyl, Zanias, Potochkine, SDH, Riki, Vioflesh, Korine. Genres: Dark Synthpop, Darkwave, Coldwave, Minimal Wave, EBM, Post-Punk, Dark Electro, Schwarze Szene.
-  </div>
 
-  <section class="section" style="padding-top:7rem">
+  <p class="crawl-only">
+    Ähnliche Künstler: Lebanon Hanover, Boy Harsher, Kite, Ductape, NNHMN, Linea Aspera, Rue Oberkampf, SYZYGYX, Minuit Machine, Kontravoid, Echoberyl, Zanias, Potochkine, SDH, Riki, Vioflesh, Korine. Genres: Dark Synthpop, Darkwave, Coldwave, Minimal Wave, EBM, Post-Punk, Dark Electro, Schwarze Szene.
+  </p>
+
+  <!-- Booking-CTA oben — Booker scrollen selten bis zum Ende -->
+  <section class="section booking-top" style="padding-top:7rem;padding-bottom:0">
+    <div class="booking-bar">
+      <div>
+        <p class="section-label" style="margin:0 0 0.25rem">Booking</p>
+        <p class="booking-avail">Verfügbar für Nordamerika und Europa</p>
+      </div>
+      <div class="booking-actions">
+        <a href="mailto:booking@2dcat.net" class="epk-btn epk-btn-primary">booking@2dcat.net</a>
+        <a href="https://drive.google.com/drive/u/1/folders/1oLPjSo92WIupT8DdGqErdnZNEKIVR7O9" target="_blank" rel="noopener" class="epk-btn">Pressematerial & Techrider</a>
+        <button onclick="window.print()" class="epk-btn epk-btn-print">EPK als PDF herunterladen</button>
+      </div>
+    </div>
+    <p style="margin-top:0.75rem;color:var(--text-muted);font-size:0.85rem">E-Mail-Korrespondenz gerne auf Deutsch oder Englisch.</p>
+  </section>
+
+  <section class="section" style="padding-top:2rem">
     <p class="section-label">Electronic Press Kit</p>
     <div class="epk-hero">
-      <img src="/images/image09.jpg" alt="2DCAT" class="epk-hero-img" />
+      <img src="/images/image09.jpg" alt="2DCAT — Dark Synthpop Duo HAEZL und Johan, Washington D.C." class="epk-hero-img" />
     </div>
 
     <div class="stats-row" style="margin-top:0">
@@ -49,7 +129,7 @@ const videosRight = [
       <div class="stat"><span class="stat-number">4.4K</span><span class="stat-label">YouTube-Follower</span></div>
     </div>
 
-    <img src="/images/image01.jpg" alt="Spotify Publikumsdaten" class="epk-audience" />
+    <img src="/images/image01.jpg" alt="2DCAT Spotify-Publikumsdaten — Top-Märkte: Deutschland, USA und Vereinigtes Königreich" class="epk-audience" />
 
     <div class="epk-bio">
       <p>2DCAT ist ein Dark-Synthpop-Duo, das seinesgleichen sucht: HAEZL, eine gefeierte Opernsängerin, die gemeinsam mit Patti LaBelle, Cynthia Erivo und Renée Fleming auf der Bühne stand, und Johan, der einen Großteil der von ihnen verwendeten Synthesizer selbst entwirft und fertigt.</p>
@@ -69,9 +149,9 @@ const videosRight = [
   <section class="section" style="padding-top:0">
     <p class="section-label">Fotos</p>
     <div class="epk-gallery">
-      {galleryImages.map((img) => (
+      {galleryImages.map((img, i) => (
         <div class="epk-gallery-item">
-          <img src={`/images/${img}`} alt="2DCAT" />
+          <img src={`/images/${img}`} alt={galleryAlts[i]} />
         </div>
       ))}
     </div>
@@ -137,7 +217,7 @@ const videosRight = [
       </thead>
       <tbody>
         <tr><td><a href="https://post-punk.com/keep-us-blinded-and-starving-dc-dark-synthpop-duo-2dcat-take-class-rage-to-the-factory-floor-in-video-for-eat-the-rich/" target="_blank" rel="noopener">Post-Punk.com</a></td><td>Feature</td></tr>
-        <tr><td><a href="https://schwarz-ontour.de/interview-2dcat/" target="_blank" rel="noopener">Schwarz on Tour</a></td><td>Interview</td></tr>
+        <tr><td><a href="https://schwarz-ontour.de/interview-2dcat/" target="_blank" rel="noopener">Schwarz on Tour <span class="press-context">(DE — Darkwave/Schwarze Szene)</span></a></td><td>Interview</td></tr>
         <tr><td><a href="https://regenmag.com/news/news-2dcat-champions-strength-and-dignity-against-idolatry-and-prayer-with-latest-single-hinting-at-upcoming-full-length-album/" target="_blank" rel="noopener">Regen Magazine</a></td><td>Feature</td></tr>
         <tr><td><a href="https://thestateofsynth.com/podcast/s9e12-sad-cats-and-sting-in-a-codpiece/" target="_blank" rel="noopener">The State of Synth</a></td><td>Podcast-Interview</td></tr>
         <tr><td><a href="https://www.youtube.com/live/obGJHGBKoaQ?si=JcFJlzJhruLzHkM0" target="_blank" rel="noopener">Eclectic Arts Media</a></td><td>Video-Interview</td></tr>
@@ -162,20 +242,10 @@ const videosRight = [
     </table>
   </section>
 
-  <section class="section" style="padding-top:0">
-    <p class="section-label">Pressematerial & Booking</p>
-    <p style="margin-bottom:2rem">Verfügbar für Nordamerika und Europa.</p>
-    <div class="epk-actions">
-      <a href="https://drive.google.com/drive/u/1/folders/1oLPjSo92WIupT8DdGqErdnZNEKIVR7O9" target="_blank" rel="noopener" class="epk-btn">Pressematerial & Techrider</a>
-      <button onclick="window.print()" class="epk-btn epk-btn-print">EPK als PDF herunterladen</button>
-    </div>
-    <p style="margin-top:2rem;color:var(--text-muted)">Booking: <a href="mailto:booking@2dcat.net">booking@2dcat.net</a></p>
-    <p style="margin-top:0.5rem;color:var(--text-muted);font-size:0.85rem">E-Mail-Korrespondenz gerne auf Deutsch oder Englisch.</p>
-  </section>
 </BaseDE>
 
 <style>
-.sr-only {
+.crawl-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -184,6 +254,31 @@ const videosRight = [
   overflow: hidden;
   clip: rect(0,0,0,0);
   border: 0;
+}
+.booking-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--accent);
+  margin-bottom: 1rem;
+}
+.booking-avail {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+.booking-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.epk-btn-primary {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .epk-hero-img {
   width: 100%;
@@ -244,6 +339,10 @@ const videosRight = [
   color: var(--text);
   margin-top: 0.5rem;
 }
+.press-context {
+  font-size: 0.8em;
+  color: var(--text-muted);
+}
 .epk-actions {
   display: flex;
   gap: 1rem;
@@ -271,5 +370,6 @@ const videosRight = [
 @media (max-width: 768px) {
   .epk-videos { grid-template-columns: 1fr; }
   .epk-gallery { grid-template-columns: repeat(2, 1fr); }
+  .booking-bar { flex-direction: column; align-items: flex-start; }
 }
 </style>
