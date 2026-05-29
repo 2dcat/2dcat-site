@@ -1,0 +1,470 @@
+---
+// Standalone email capture page - no nav/footer
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2DCAT — Download "Stay With Me"</title>
+<meta name="description" content="Download 2DCAT's Stay With Me. Enter your email to get the track.">
+<meta property="og:title" content='2DCAT — Download "Stay With Me"'>
+<meta property="og:image" content="https://res.cloudinary.com/dkpcunzuk/image/upload/v1776348706/2DCAT_p5stqg.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<style>
+  :root {
+    --bg: #0d0a0a;
+    --red: #b82a1e;
+    --red-dim: #5a1510;
+    --red-glow: rgba(184, 42, 30, 0.25);
+    --red-border: rgba(184, 42, 30, 0.3);
+    --white: #e8e0d8;
+    --muted: #7a7068;
+    --parchment: #CCC3B2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg);
+    background-image: url('https://res.cloudinary.com/dkpcunzuk/image/upload/v1779303714/Untitled_design_2_pot5dr.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: scroll;
+    color: var(--white);
+    font-family: 'Share Tech Mono', monospace;
+    min-height: 100dvh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(5,2,2,0.82) 0%, rgba(5,2,2,0.75) 50%, rgba(5,2,2,0.92) 100%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+  }
+
+  .page {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 60px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .site-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .site-header p {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .hero-image {
+    width: 100%;
+    max-width: 340px;
+    object-fit: cover;
+    border: 1px solid var(--red-border);
+    box-shadow: 0 0 40px var(--red-glow), 0 0 80px rgba(184,42,30,0.08);
+    margin-bottom: 24px;
+    animation: fadeIn 0.7s ease both 0.1s;
+  }
+
+  .headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 8px;
+    animation: fadeIn 0.7s ease both 0.15s;
+  }
+
+  .subtext {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--red);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 28px;
+    animation: fadeIn 0.7s ease both 0.18s;
+  }
+
+  .form-label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 14px;
+    animation: fadeIn 0.7s ease both 0.2s;
+  }
+
+  .form-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+    animation: fadeIn 0.7s ease both 0.22s;
+  }
+
+  .email-input {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(30, 10, 10, 0.85);
+    border: 1px solid var(--red-border);
+    color: var(--white);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    outline: none;
+    animation: pulse-border 2s ease-in-out infinite;
+  }
+
+  .email-input::placeholder { color: var(--muted); }
+
+  .email-input:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 16px var(--red-glow);
+    animation: none;
+  }
+
+  @keyframes pulse-border {
+    0%, 100% { border-color: rgba(184, 42, 30, 0.2); box-shadow: none; }
+    50% { border-color: #b82a1e; box-shadow: 0 0 20px rgba(184, 42, 30, 0.6), 0 0 40px rgba(184, 42, 30, 0.2); }
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 16px 18px;
+    background: rgba(184, 42, 30, 0.15);
+    border: 1px solid var(--red);
+    color: var(--white);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .submit-btn:hover {
+    background: rgba(184, 42, 30, 0.3);
+    box-shadow: 0 0 24px var(--red-glow);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .quote-block {
+    width: 100%;
+    margin-bottom: 20px;
+    animation: fadeIn 0.7s ease both 0.27s;
+  }
+
+  .quote {
+    border-left: 2px solid var(--red);
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    background: rgba(25, 8, 8, 0.4);
+  }
+
+  .quote p {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--parchment);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .quote cite {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 8px;
+    font-style: normal;
+  }
+
+  .site-footer {
+    margin-top: 20px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 2, 2, 0.92);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.visible { display: flex; }
+
+  .modal-box {
+    background: #130a0a;
+    border: 1px solid var(--red-border);
+    padding: 36px 28px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(184, 42, 30, 0.2);
+  }
+
+  .modal-icon { font-size: 32px; margin-bottom: 16px; }
+
+  .modal-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .modal-body {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    line-height: 1.9;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .modal-merch-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(184, 42, 30, 0.15);
+    border: 1px solid var(--red);
+    color: var(--white);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: background 0.2s ease;
+  }
+
+  .modal-merch-btn:hover { background: rgba(184, 42, 30, 0.3); }
+
+  .modal-dismiss {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'Share Tech Mono', monospace;
+    transition: color 0.2s ease;
+    padding: 6px;
+  }
+
+  .modal-dismiss:hover { color: var(--white); }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<script>
+  (function() {
+    var ua = navigator.userAgent;
+    var isFBBrowser = /FBAN|FBAV|FB_IAB|FB4A|FBIOS|Instagram|TikTok/i.test(ua);
+    var isIOS = /iPhone|iPad|iPod/i.test(ua);
+    if (isFBBrowser && isIOS) {
+      var sep = location.href.indexOf('?') > -1 ? '&' : '?';
+      location.href = location.href + sep + 'openExternalBrowser=1';
+    }
+  })();
+</script>
+
+<div class="page">
+  <header class="site-header">
+    <p>2DCAT &mdash; Dark Synthpop from Washington, DC</p>
+  </header>
+
+  <img
+    class="hero-image"
+    src="https://res.cloudinary.com/dkpcunzuk/image/upload/v1776348706/2DCAT_p5stqg.jpg"
+    alt="2DCAT"
+    loading="eager"
+  >
+
+  <h1 class="headline">Download "Stay With Me"</h1>
+  <p class="subtext">The night is calling&hellip;</p>
+  <p class="form-label">Enter your email to get the track</p>
+
+  <div class="form-block">
+    <input
+      type="email"
+      class="email-input"
+      id="email-input"
+      placeholder="Email"
+      autocomplete="email"
+      required
+    >
+    <button class="submit-btn" id="submit-btn">Send Me The Track</button>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote">
+      <p>"A vocal caliber dark synthpop rarely gets: lungs, teeth, diction, and gravitas."</p>
+      <cite>Post-Punk.com</cite>
+    </div>
+    <div class="quote">
+      <p>"A homemade electrical animal with wires for veins and bad intentions in its little metal heart."</p>
+      <cite>Post-Punk.com</cite>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 2DCAT</p>
+  </footer>
+</div>
+
+<div class="modal-overlay" id="success-modal">
+  <div class="modal-box">
+    <div class="modal-icon">&#9993;</div>
+    <h2 class="modal-heading">Check Your Inbox</h2>
+    <p class="modal-body">
+      Your download link is on its way.<br>
+      While you wait&hellip;
+    </p>
+    <a href="https://2dcat-music.myshopify.com/" class="modal-merch-btn" target="_blank" rel="noopener">
+      Check Out Our Merch &rarr;
+    </a>
+    <button class="modal-dismiss" id="modal-dismiss">Close</button>
+  </div>
+</div>
+
+<script>
+  var CAPI_WORKER_URL = 'https://2dcat-capi.adam-hauch.workers.dev/';
+  var SUBSCRIBE_WORKER_URL = 'https://2dcat-mailerlite-subscribe.adam-hauch.workers.dev';
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : null;
+  }
+
+  function getFbc() {
+    var cookie = getCookie('_fbc');
+    if (cookie) return cookie;
+    var fbclid = new URLSearchParams(location.search).get('fbclid');
+    if (fbclid) return 'fb.1.' + Date.now() + '.' + fbclid;
+    return null;
+  }
+
+  function isLikelyBot() {
+    if (navigator.webdriver) return true;
+    var isMobileUA = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent);
+    var hasTouch = navigator.maxTouchPoints > 0;
+    if (isMobileUA && !hasTouch) return true;
+    return false;
+  }
+
+  async function fireConversion(eventName) {
+    if (isLikelyBot()) return;
+    try {
+      await fetch(CAPI_WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_name: eventName,
+          fbc: getFbc(),
+          fbp: getCookie('_fbp'),
+          user_agent: navigator.userAgent,
+          page_url: location.href,
+          timestamp: Math.floor(Date.now() / 1000)
+        }),
+        keepalive: true
+      });
+    } catch(e) {}
+  }
+
+  window.addEventListener('load', function() { fireConversion('PageView'); });
+
+  document.getElementById('submit-btn').addEventListener('click', async function() {
+    var email = document.getElementById('email-input').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('email-input').style.borderColor = 'var(--red)';
+      document.getElementById('email-input').focus();
+      return;
+    }
+
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      await fetch(SUBSCRIBE_WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      });
+      fireConversion('ViewContent');
+      document.getElementById('success-modal').classList.add('visible');
+    } catch(e) {
+      btn.disabled = false;
+      btn.textContent = 'Send Me The Track';
+    }
+  });
+
+  document.getElementById('modal-dismiss').addEventListener('click', function() {
+    document.getElementById('success-modal').classList.remove('visible');
+  });
+
+  document.getElementById('success-modal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('visible');
+  });
+</script>
+
+</body>
+</html>

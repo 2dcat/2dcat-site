@@ -4,82 +4,141 @@ const {
   description = "2DCAT is a dark synthpop duo from Washington, D.C. Analog synthesizers, commanding vocals, and machine-driven rhythms rooted in darkwave, coldwave, and dark synthpop.",
   ogImage = "https://2dcat.com/og.jpg",
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  pageSchema = null,
 } = Astro.props;
 
-const jsonLD = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MusicGroup",
-    "name": "2DCAT",
-    "url": "https://2dcat.com",
-    "image": "https://2dcat.com/images/hero.jpg",
-    "description": "2DCAT is a dark synthpop duo from Washington, D.C. rooted in analog-driven synthpop, darkwave, coldwave, and minimal wave.",
-    "genre": ["Dark Synthpop", "Darkwave", "Coldwave", "Minimal Wave", "EBM", "Post-Punk", "Dark Electro", "Industrial", "Schwarze Szene"],
-    "foundingLocation": {
-      "@type": "Place",
-      "name": "Washington, D.C., USA"
-    },
-    "member": [
-      {
+// Base MusicGroup entity — emitted on every page so crawlers
+// encounter it consistently regardless of entry point.
+const musicGroupSchema = {
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "@id": "https://2dcat.com/#band",
+  "name": "2DCAT",
+  "url": "https://2dcat.com",
+  "image": "https://2dcat.com/og.jpg",
+  "description": "2DCAT is a dark synthpop duo from Washington, D.C. Their music draws from darkwave, coldwave, minimal wave, and EBM traditions rooted in late 1970s and early 1980s European electronic music. Fronted by HAEZL, an acclaimed vocalist who has performed alongside Patti LaBelle, Cynthia Erivo, and Renée Fleming, and Johan, who designs and builds analog synthesizers and FPGA-based instruments from scratch.",
+  "genre": ["Dark Synthpop", "Darkwave", "Coldwave", "Minimal Wave", "EBM", "Post-Punk", "Dark Electro", "Schwarze Szene"],
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Washington, D.C.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Washington",
+      "addressRegion": "DC",
+      "addressCountry": "US"
+    }
+  },
+  "member": [
+    {
+      "@type": "OrganizationRole",
+      "member": {
         "@type": "Person",
         "name": "HAEZL",
-        "roleName": "Vocals, Theremin, Lyrics"
+        "description": "Vocalist, theremin player, and lyricist. Has performed alongside Patti LaBelle, Cynthia Erivo, and Renée Fleming. Television credits include VH1, TLC, and The Today Show."
       },
-      {
+      "roleName": ["Vocals", "Theremin", "Lyrics"],
+      "startDate": "2014"
+    },
+    {
+      "@type": "OrganizationRole",
+      "member": {
         "@type": "Person",
         "name": "Johan Hauck",
-        "roleName": "Synthesizers, Drumkits, Arrangements"
-      }
-    ],
-    "sameAs": [
-      "https://open.spotify.com/artist/78CkUkpoNpLZbnIOv00M6Q",
-      "https://www.instagram.com/the2dcat/",
-      "https://www.facebook.com/the2dcat",
-      "https://www.youtube.com/@2dcat",
-      "https://2dcat.bandcamp.com/"
-    ]
-  },
+        "description": "Synthesizers, drum machines, arrangements. Designs and fabricates custom synthesizers including FPGA-based instruments used in 2DCAT live performance."
+      },
+      "roleName": ["Synthesizers", "Drum Machines", "Arrangements", "Instrument Design"],
+      "startDate": "2014"
+    }
+  ],
+  "sameAs": [
+    "https://open.spotify.com/artist/78CkUkpoNpLZbnIOv00M6Q",
+    "https://2dcat.bandcamp.com/",
+    "https://www.instagram.com/the2dcat/",
+    "https://www.facebook.com/the2dcat",
+    "https://www.youtube.com/@2dcat"
+  ]
+};
+
+// Press coverage — real published quotes with source URLs.
+// Both excerpted from Alice Teeple's feature in Post-Punk.com,
+// published May 12, 2026.
+const pressSchema = [
   {
     "@context": "https://schema.org",
     "@type": "Review",
+    "datePublished": "2026-05-12",
     "itemReviewed": {
       "@type": "MusicGroup",
+      "@id": "https://2dcat.com/#band",
       "name": "2DCAT"
     },
     "reviewBody": "A vocal caliber dark synthpop rarely gets: lungs, teeth, diction, and gravitas.",
     "author": {
+      "@type": "Person",
+      "name": "Alice Teeple",
+      "url": "https://post-punk.com/author/alice-teeple/"
+    },
+    "publisher": {
       "@type": "Organization",
       "name": "Post-Punk.com",
       "url": "https://post-punk.com"
-    }
+    },
+    "url": "https://post-punk.com/keep-us-blinded-and-starving-dc-dark-synthpop-duo-2dcat-take-class-rage-to-the-factory-floor-in-video-for-eat-the-rich/"
   },
   {
     "@context": "https://schema.org",
     "@type": "Review",
+    "datePublished": "2026-05-12",
     "itemReviewed": {
       "@type": "MusicGroup",
+      "@id": "https://2dcat.com/#band",
       "name": "2DCAT"
     },
     "reviewBody": "A homemade electrical animal with wires for veins and bad intentions in its little metal heart.",
     "author": {
+      "@type": "Person",
+      "name": "Alice Teeple",
+      "url": "https://post-punk.com/author/alice-teeple/"
+    },
+    "publisher": {
       "@type": "Organization",
       "name": "Post-Punk.com",
       "url": "https://post-punk.com"
-    }
+    },
+    "url": "https://post-punk.com/keep-us-blinded-and-starving-dc-dark-synthpop-duo-2dcat-take-class-rage-to-the-factory-floor-in-video-for-eat-the-rich/"
   }
 ];
+
+// Merge base schema + press citations + any page-specific schema
+// passed via the pageSchema prop (e.g. MusicAlbum on /music,
+// Event on /tour, FAQPage on /about).
+const schemaOutput = pageSchema
+  ? [musicGroupSchema, ...pressSchema, ...pageSchema]
+  : [musicGroupSchema, ...pressSchema];
+
+// Build correct hreflang URLs without brittle string replacement.
+const isDE = Astro.url.pathname.startsWith('/de');
+const enURL = isDE
+  ? canonicalURL.replace('/de', '')
+  : canonicalURL;
+const deURL = isDE
+  ? canonicalURL
+  : canonicalURL.replace(
+      Astro.site?.origin ?? 'https://2dcat.com',
+      (Astro.site?.origin ?? 'https://2dcat.com') + '/de'
+    );
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang={isDE ? "de" : "en"}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
-  <meta name="keywords" content="2DCAT, dark synthpop, darkwave, coldwave, minimal wave, EBM, post-punk, dark electro, industrial, Schwarze Szene, analog synthesizers, Washington DC, electronic music, HAEZL, Johan Hauck, Lebanon Hanover, Boy Harsher, Kite, NNHMN, Linea Aspera, Minuit Machine, Kontravoid, Zanias" />
+  <meta name="keywords" content="2DCAT, dark synthpop, darkwave, coldwave, minimal wave, EBM, post-punk, dark electro, Schwarze Szene, analog synthesizers, Washington DC, HAEZL, Johan Hauck" />
   <link rel="canonical" href={canonicalURL} />
-  <link rel="alternate" hreflang="en" href={canonicalURL} />
-  <link rel="alternate" hreflang="de" href={canonicalURL.replace('https://2dcat.com', 'https://2dcat.com/de')} />
-  <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+  <link rel="alternate" hreflang="en" href={enURL} />
+  <link rel="alternate" hreflang="de" href={deURL} />
+  <link rel="alternate" hreflang="x-default" href={enURL} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={ogImage} />
@@ -94,11 +153,11 @@ const jsonLD = [
   <!-- <meta name="google-site-verification" content="REPLACE_ME" /> -->
   <!-- <meta name="msvalidate.01" content="REPLACE_ME" /> -->
   <title>{title}</title>
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
+  <script type="application/ld+json" set:html={JSON.stringify(schemaOutput)} />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Trade+Gothic+Next+Condensed:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -144,9 +203,9 @@ const jsonLD = [
     const toggle = document.getElementById('navToggle');
     const menu = document.getElementById('navMenu');
     const close = document.getElementById('navClose');
-    toggle.addEventListener('click', () => menu.classList.add('open'));
-    close.addEventListener('click', () => menu.classList.remove('open'));
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+    toggle?.addEventListener('click', () => menu?.classList.add('open'));
+    close?.addEventListener('click', () => menu?.classList.remove('open'));
+    menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu?.classList.remove('open')));
   </script>
 </body>
 </html>
