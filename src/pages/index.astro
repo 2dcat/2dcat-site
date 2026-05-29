@@ -52,6 +52,12 @@ import Base from '../layouts/Base.astro';
   <div class="sr-only" aria-hidden="true">
     2DCAT is a dark synthpop duo from Washington, D.C. Their music draws from darkwave, coldwave, minimal wave, and EBM traditions rooted in late 1970s and early 1980s European electronic music. Fronted by HAEZL, an acclaimed vocalist who has performed alongside Patti LaBelle, Cynthia Erivo, and Renée Fleming, and Johan, who designs and builds analog synthesizers from scratch, 2DCAT creates music that is melancholic, cinematic, and built for both the dancefloor and solitude. Their sound belongs to the Schwarze Szene and appeals to fans of Lebanon Hanover, Boy Harsher, Kite, NNHMN, Linea Aspera, Minuit Machine, Kontravoid, and Zanias. Based in Washington D.C., 2DCAT performs across North America and Europe. Upcoming shows include Echoes of Rebellion Festival in Cologne, Germany on July 24, 2026.
   </div>
+  <div id="links" style="display:none"></div>
+  <script>
+    if (window.location.hash === '#links') {
+      window.location.href = '/links';
+    }
+  </script>
 </Base>
 
 <style>
