@@ -47,7 +47,8 @@ import BaseDE from '../../layouts/BaseDE.astro';
   <section class="section" style="padding-top:0">
     <p class="section-label">Live</p>
     <h2>Kommende Shows</h2>
-    <table style="margin-top:2rem">
+
+    <table style="margin-top:2rem" id="shows-table">
       <thead>
         <tr>
           <th>Datum</th>
@@ -56,12 +57,9 @@ import BaseDE from '../../layouts/BaseDE.astro';
           <th></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="shows-tbody">
         <tr>
-          <td>24. Jul. 2026</td>
-          <td>Echoes of Rebellion Festival</td>
-          <td>Köln, DE</td>
-          <td><a href="https://eventfrog.de/de/p/festivals/weitere-festivals/echoes-of-rebellion-2026-7356786551446100775.html" target="_blank" rel="noopener">Tickets</a></td>
+          <td colspan="4" style="color:var(--text-muted)">Shows werden geladen...</td>
         </tr>
       </tbody>
     </table>
@@ -71,6 +69,47 @@ import BaseDE from '../../layouts/BaseDE.astro';
     </p>
   </section>
 </BaseDE>
+
+<script>
+  async function loadShows() {
+    const tbody = document.getElementById('shows-tbody');
+    try {
+      const res = await fetch(
+        'https://rest.bandsintown.com/artists/2dcat/events/?app_id=352c0582b5eea3177112491a25b9f1fd&date=upcoming'
+      );
+      if (!res.ok) throw new Error('API error');
+      const events = await res.json();
+
+      if (!Array.isArray(events) || events.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="color:var(--text-muted)">Keine kommenden Shows.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = events.map(event => {
+        const date = new Date(event.datetime);
+        const dateStr = date.toLocaleDateString('de-DE', {
+          day: 'numeric', month: 'short', year: 'numeric'
+        });
+        const venue = event.venue?.name ?? '';
+        const city = event.venue
+          ? `${event.venue.city}${event.venue.country ? ', ' + event.venue.country : ''}`
+          : '';
+        const ticketUrl = event.offers?.[0]?.url ?? event.url ?? '#';
+
+        return `<tr>
+          <td>${dateStr}</td>
+          <td>${venue}</td>
+          <td>${city}</td>
+          <td><a href="${ticketUrl}" target="_blank" rel="noopener">Tickets</a></td>
+        </tr>`;
+      }).join('');
+    } catch (err) {
+      tbody.innerHTML = '<tr><td colspan="4" style="color:var(--text-muted)">Shows konnten nicht geladen werden. <a href="https://www.bandsintown.com/a/14389701-2dcat" target="_blank" rel="noopener">Direkt auf Bandsintown nachsehen.</a></td></tr>';
+    }
+  }
+
+  loadShows();
+</script>
 
 <style>
 .music-grid {
