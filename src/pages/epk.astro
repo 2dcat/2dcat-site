@@ -109,7 +109,7 @@ const epkSchema = [
       <div class="booking-actions">
         <a href="mailto:booking@2dcat.net" class="epk-btn epk-btn-primary">booking@2dcat.net</a>
         <a href="https://drive.google.com/drive/u/1/folders/1oLPjSo92WIupT8DdGqErdnZNEKIVR7O9" target="_blank" rel="noopener" class="epk-btn">Press Assets & Tech Rider</a>
-        <button onclick="window.print()" class="epk-btn epk-btn-print">Download EPK as PDF</button>
+        <button id="epk-pdf-btn" class="epk-btn epk-btn-print">Download EPK as PDF</button>
       </div>
     </div>
   </section>
@@ -254,8 +254,6 @@ const epkSchema = [
   overflow: hidden;
   clip: rect(0,0,0,0);
   border: 0;
-  /* No aria-hidden — content stays accessible to screen readers
-     and visible to crawlers, just not shown visually */
 }
 .booking-bar {
   display: flex;
@@ -375,3 +373,153 @@ const epkSchema = [
   .booking-bar { flex-direction: column; align-items: flex-start; }
 }
 </style>
+
+<script>
+document.getElementById('epk-pdf-btn').addEventListener('click', async function () {
+  const btn = this;
+  btn.textContent = 'Generating PDF...';
+  btn.disabled = true;
+
+  // Load libraries dynamically so they don't bloat the page for regular visitors
+  await Promise.all([
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'),
+  ]);
+
+  // Elements to hide during capture (nav, booking bar, footer, video iframes)
+  // We hide iframes because html2canvas can't cross-origin capture them anyway
+  const hideSelectors = [
+    'nav',
+    'header',
+    'footer',
+    '.booking-top',       // the booking bar section at the top
+    '.epk-video',         // YouTube iframes — show placeholder instead
+  ];
+
+  const hidden = [];
+  hideSelectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => {
+      hidden.push({ el, display: el.style.display });
+      el.style.display = 'none';
+    });
+  });
+
+  // Add a video placeholder note so the PDF isn't just blank space there
+  const videoSection = document.querySelector('.epk-videos');
+  let videoNote = null;
+  if (videoSection) {
+    videoNote = document.createElement('p');
+    videoNote.textContent = 'Video performances available at 2dcat.com/epk';
+    videoNote.style.cssText = 'color:#CCC3B2;font-size:0.9rem;letter-spacing:0.05em;padding:1rem 0;';
+    videoSection.parentNode.insertBefore(videoNote, videoSection);
+  }
+
+  // Capture the full page body at 1400px wide
+  const captureTarget = document.body;
+  const originalWidth = captureTarget.style.width;
+  const originalOverflow = document.documentElement.style.overflow;
+
+  // Temporarily force full render width for the screenshot
+  document.documentElement.style.overflow = 'visible';
+
+  try {
+    const canvas = await html2canvas(captureTarget, {
+      scale: 1.5,              // 1.5x for sharpness without huge file size
+      useCORS: true,           // needed for /images/ assets
+      allowTaint: false,
+      backgroundColor: '#0a0a0a',  // match site dark background
+      width: 1400,
+      windowWidth: 1400,
+      scrollX: 0,
+      scrollY: 0,
+      logging: false,
+      imageTimeout: 10000,
+      onclone: (clonedDoc) => {
+        // Force the cloned document to also be dark-background
+        clonedDoc.documentElement.style.background = '#0a0a0a';
+        clonedDoc.body.style.background = '#0a0a0a';
+      }
+    });
+
+    const { jsPDF } = window.jspdf;
+
+    // PDF page is the same width as the canvas, height is auto-paginated
+    const imgWidth = 210; // A4 width in mm — wide enough for screens, standard for email
+    const pageHeight = 297; // A4 height in mm
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    const pdf = new jsPDF({
+      orientation: imgHeight > imgWidth ? 'portrait' : 'landscape',
+      unit: 'mm',
+      format: [imgWidth, pageHeight],
+      compress: true,
+    });
+
+    const imgData = canvas.toDataURL('image/jpeg', 0.88);
+
+    let yPosition = 0;
+    let remainingHeight = imgHeight;
+    let pageNum = 0;
+
+    // Slice the canvas image across multiple PDF pages
+    while (remainingHeight > 0) {
+      if (pageNum > 0) pdf.addPage();
+
+      // Source crop: which slice of the image goes on this page
+      const sourceY = (pageNum * pageHeight * canvas.width) / imgWidth;
+      const sourceHeight = Math.min(
+        (pageHeight * canvas.width) / imgWidth,
+        canvas.height - sourceY
+      );
+
+      // Create a temporary canvas for this slice
+      const sliceCanvas = document.createElement('canvas');
+      sliceCanvas.width = canvas.width;
+      sliceCanvas.height = sourceHeight;
+      const ctx = sliceCanvas.getContext('2d');
+      ctx.drawImage(canvas, 0, -sourceY);
+
+      const sliceData = sliceCanvas.toDataURL('image/jpeg', 0.88);
+      const sliceHeightMm = (sourceHeight * imgWidth) / canvas.width;
+
+      pdf.addImage(sliceData, 'JPEG', 0, 0, imgWidth, sliceHeightMm);
+
+      remainingHeight -= pageHeight;
+      pageNum++;
+    }
+
+    pdf.setProperties({
+      title: '2DCAT EPK — Dark Synthpop Press Kit',
+      subject: 'Electronic Press Kit',
+      author: '2DCAT',
+      keywords: 'dark synthpop, darkwave, Washington DC, 2DCAT',
+      creator: '2dcat.com',
+    });
+
+    pdf.save('2DCAT-EPK.pdf');
+
+  } catch (err) {
+    console.error('EPK PDF generation failed:', err);
+    alert('PDF generation failed. Please try again or contact booking@2dcat.net for press assets.');
+  } finally {
+    // Restore everything
+    hidden.forEach(({ el, display }) => { el.style.display = display; });
+    if (videoNote) videoNote.remove();
+    document.documentElement.style.overflow = originalOverflow;
+    captureTarget.style.width = originalWidth;
+    btn.textContent = 'Download EPK as PDF';
+    btn.disabled = false;
+  }
+});
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector(`script[src="${src}"]`)) { resolve(); return; }
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+</script>
