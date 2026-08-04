@@ -2,7 +2,9 @@
 import BaseDE from '../../layouts/BaseDE.astro';
 
 const galleryImages = [
+  "Echoes-of-Rebellion-2DCat-55.jpg",
   "FB_IMG_1785350295046.jpg",
+  "Echoes-of-Rebellion-2DCat-54.jpg",
   "2026-07-24-EOR-2DCAT-Bild-009x.jpg",
   "IMG-20260731-WA0032.jpg",
   "7682640a.jpg",
@@ -12,10 +14,14 @@ const galleryImages = [
   "FB_IMG_1785392277183.jpg",
   "6ffe881a.jpg",
   "IMG-20260727-WA0022.jpg",
+  "Echoes-of-Rebellion-2DCat-1.jpg",
+  "Echoes-of-Rebellion-2DCat-22.jpg",
 ];
 
 const galleryAlts = [
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: black-generation.de",
   "2DCAT live bei Echoes of Rebellion, Köln — Foto: HR-Pictures.de",
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: black-generation.de",
   "2DCAT live bei Echoes of Rebellion, Köln — Foto: Monkeypress",
   "2DCAT live in Leipzig",
   "2DCAT Darkwave-Set",
@@ -25,6 +31,8 @@ const galleryAlts = [
   "2DCAT live",
   "Johan auf der Bühne mit 2DCAT",
   "2DCAT live in Köln",
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: black-generation.de",
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: black-generation.de",
 ];
 
 const videosLeft = [
@@ -98,7 +106,6 @@ const epkSchema = [
     Ähnliche Künstler: Lebanon Hanover, Boy Harsher, Kite, Ductape, NNHMN, Linea Aspera, Rue Oberkampf, SYZYGYX, Minuit Machine, Kontravoid, Echoberyl, Zanias, Potochkine, SDH, Riki, Vioflesh, Korine. Genres: Dark Synthpop, Darkwave, Coldwave, Minimal Wave, EBM, Post-Punk, Dark Electro, Schwarze Szene.
   </p>
 
-  <!-- Booking-CTA oben — Booker scrollen selten bis zum Ende -->
   <section class="section booking-top" style="padding-top:7rem;padding-bottom:0">
     <div class="booking-bar">
       <div>
@@ -149,10 +156,16 @@ const epkSchema = [
     <p class="section-label">Fotos</p>
     <div class="epk-gallery">
       {galleryImages.map((img, i) => (
-        <div class="epk-gallery-item">
-          <img src={`/images/${img}`} alt={galleryAlts[i]} />
+        <div class="epk-gallery-item" data-index={i}>
+          <img src={`/images/${img}`} alt={galleryAlts[i]} loading="lazy" />
         </div>
       ))}
+    </div>
+    <div class="epk-lightbox" id="epk-lightbox" aria-hidden="true">
+      <button class="epk-lightbox-close" id="epk-lightbox-close" aria-label="Schließen">&times;</button>
+      <button class="epk-lightbox-prev" id="epk-lightbox-prev" aria-label="Zurück">&#8592;</button>
+      <button class="epk-lightbox-next" id="epk-lightbox-next" aria-label="Weiter">&#8594;</button>
+      <img class="epk-lightbox-img" id="epk-lightbox-img" src="" alt="" />
     </div>
   </section>
 
@@ -309,21 +322,68 @@ const epkSchema = [
 .epk-bio p { margin-bottom: 1.5rem; }
 .epk-fans { color: var(--text-muted); }
 
-/* Masonry gallery */
+/* Gallery grid */
 .epk-gallery {
-  columns: 3 200px;
-  column-gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
   margin-top: 1rem;
 }
 .epk-gallery-item {
-  break-inside: avoid;
-  margin-bottom: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  background: #111;
 }
 .epk-gallery-item img {
   width: 100%;
   height: auto;
+  max-height: 350px;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.2s;
+}
+.epk-gallery-item:hover img {
+  opacity: 0.85;
+}
+
+/* Lightbox */
+.epk-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.epk-lightbox.active {
+  display: flex;
+}
+.epk-lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
   display: block;
 }
+.epk-lightbox-close,
+.epk-lightbox-prev,
+.epk-lightbox-next {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 1rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.epk-lightbox-close:hover,
+.epk-lightbox-prev:hover,
+.epk-lightbox-next:hover { opacity: 1; }
+.epk-lightbox-close { top: 1rem; right: 1.5rem; font-size: 2.5rem; }
+.epk-lightbox-prev { left: 1rem; top: 50%; transform: translateY(-50%); }
+.epk-lightbox-next { right: 1rem; top: 50%; transform: translateY(-50%); }
 
 .epk-videos {
   display: grid;
@@ -381,7 +441,94 @@ const epkSchema = [
 }
 @media (max-width: 768px) {
   .epk-videos { grid-template-columns: 1fr; }
-  .epk-gallery { columns: 2 150px; }
+  .epk-gallery { grid-template-columns: repeat(2, 1fr); }
   .booking-bar { flex-direction: column; align-items: flex-start; }
 }
 </style>
+
+<script>
+const images = [
+  "Echoes-of-Rebellion-2DCat-55.jpg",
+  "FB_IMG_1785350295046.jpg",
+  "Echoes-of-Rebellion-2DCat-54.jpg",
+  "2026-07-24-EOR-2DCAT-Bild-009x.jpg",
+  "IMG-20260731-WA0032.jpg",
+  "7682640a.jpg",
+  "FB_IMG_1785350285242.jpg",
+  "2026-07-24-EOR-2DCAT-Bild-002x.jpg",
+  "6589f4b0.jpg",
+  "FB_IMG_1785392277183.jpg",
+  "6ffe881a.jpg",
+  "IMG-20260727-WA0022.jpg",
+  "Echoes-of-Rebellion-2DCat-1.jpg",
+  "Echoes-of-Rebellion-2DCat-22.jpg",
+];
+
+const alts = [
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: black-generation.de",
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: HR-Pictures.de",
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: black-generation.de",
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: Monkeypress",
+  "2DCAT live in Leipzig",
+  "2DCAT Darkwave-Set",
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: HR-Pictures.de",
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: Monkeypress",
+  "HAEZL und Johan von 2DCAT",
+  "2DCAT live",
+  "Johan auf der Bühne mit 2DCAT",
+  "2DCAT live in Köln",
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: black-generation.de",
+  "2DCAT live bei Echoes of Rebellion, Köln — Foto: black-generation.de",
+];
+
+let current = 0;
+
+const lightbox = document.getElementById('epk-lightbox');
+const lbImg = document.getElementById('epk-lightbox-img');
+
+function openLightbox(index) {
+  current = index;
+  lbImg.src = `/images/${images[current]}`;
+  lbImg.alt = alts[current];
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function prevImage() {
+  current = (current - 1 + images.length) % images.length;
+  lbImg.src = `/images/${images[current]}`;
+  lbImg.alt = alts[current];
+}
+
+function nextImage() {
+  current = (current + 1) % images.length;
+  lbImg.src = `/images/${images[current]}`;
+  lbImg.alt = alts[current];
+}
+
+document.querySelectorAll('.epk-gallery-item').forEach((item) => {
+  item.addEventListener('click', () => openLightbox(parseInt(item.dataset.index)));
+});
+
+document.getElementById('epk-lightbox-close').addEventListener('click', closeLightbox);
+document.getElementById('epk-lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+document.getElementById('epk-lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') prevImage();
+  if (e.key === 'ArrowRight') nextImage();
+});
+</script>
